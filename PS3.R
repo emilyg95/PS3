@@ -1,2 +1,31 @@
-door = ceiling(runif(1, 0, 3)) ## runif generates a random number between zero and three and ceiling rounds up to the largest integer value ensuring results will be whole numbers one through three
-class(door) = "door" ## defines class of object door as "door"
+door1 = 2 ## creates object door = 2 to indicate candidate chose number 2
+
+class(door1) = "door" ## defines class of object door1 as "door"
+
+door1 ## test
+
+PlayGame = function(door){ ## defines existence of PlayGame method for class door
+  UseMethod("PlayGame", door)
+}
+
+PlayGame.door = function(door){ ## creates a function using PlayGame method for class door
+  car = ceiling(runif(1, 0, 3)) ## creates object "car" to indicate the number of the winning door. runif generates a random number between 0 and 3 and ceiling rounds up to the largest integer value ensuring the result will be a whole number from 1 through 3
+  if (door == car){ ## if then statement which prints congratulations if the number door of the input the candidate chose and the number of the winning door are equal
+    return("Congratulations! You Win")
+  }
+  else { ## prints sorry you lose if the numbers are not equal
+    return("Sorry :( You Lose")
+}
+}
+
+PlayGame(door1) ## test
+
+
+setClass(Class = "door",
+         representation = representation(
+           x = "numeric"
+         ),
+         prototype = prototype(
+           x = c()
+         )
+)
