@@ -41,3 +41,10 @@ setValidity("door", function(object){ ## creates function to check validity of o
   }
 }
 )
+
+generic = function(object = "door"){ ## creates interior of generic function PlayGame for class door
+  standardGeneric("PlayGame")
+}
+
+setGeneric("PlayGame", generic) ## sets the generic as the one I just created
+
