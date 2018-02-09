@@ -31,3 +31,13 @@ setClass(Class = "door", ## creates a new class "door"
 )
 
 new("door") ## check
+
+setValidity("door", function(object){ ## creates function to check validity of objects of class door
+  test1 = object == 1
+  test2 = object == 2
+  test3 = object == 3
+  if (!test1 & !test2 & !test3){ ## if then statement which checks to see if the input is equal to 1 2 or 3 and rejects if not
+    return("object is not a valid value")
+  }
+}
+)
