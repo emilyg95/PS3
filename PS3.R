@@ -1,4 +1,4 @@
-door1 = 2 ## creates object door = 2 to indicate candidate chose number 2
+door1 = 2 ## creates object door1 equal to 2 to indicate candidate chose number 2
 
 class(door1) = "door" ## defines class of object door1 as "door"
 
@@ -26,30 +26,33 @@ setClass(Class = "door", ## creates a new class "door"
            x = "numeric" ## indicates 1 input x which must be numeric
          ),
          prototype = prototype(
-           x = c() ## indicates x will be a list
+           x = c() ## indicates x will be a vector
          )
 )
 
 new("door") ## check
 
 setValidity("door", function(object){ ## creates function to check validity of objects of class door
-  test1 = object == 1
-  test2 = object == 2
-  test3 = object == 3
+  test1 = object@x == 1
+  test2 = object@x == 2
+  test3 = object@x == 3
   if (!test1 & !test2 & !test3){ ## if then statement which checks to see if the input is equal to 1 2 or 3 and rejects if not
     return("object is not a valid value")
   }
 }
 )
 
-generic = function(object = "door"){ ## creates interior of generic function PlayGame for class door
+new("door", x = 5) ## check to confirm error if x != 1 2 or 3 
+new("door", x = 2)
+
+generic = function(object = "door"){ ## creates interior function for setGeneric, which defines the function as PlayGame and its generic input as of class door
   standardGeneric("PlayGame")
 }
 
-setGeneric("PlayGame", generic) ## sets the generic as the one I just created
+setGeneric("PlayGame", generic) ## sets the generic of function PlayGame as the function I just created
 
-setMethod("PlayGame", "door", 
-          function(object){ ## sets the method of the PlayGame function for class door
+setMethod("PlayGame", "door",
+          function(object){ ## sets the method of the PlayGame function for class door with the same commands as the function I created in s3
             car = ceiling(runif(1, 0, 3))
             if (object == car){
               return("Congratulations! You Win")
@@ -59,8 +62,14 @@ setMethod("PlayGame", "door",
           }}
             )
 
-door2 = (3)
+door2 = 3 ## creates new object door2 equal to 3
 
-class(door2) = "door"
+class(door2) = "door" ## makes door2 of class door
 
-PlayGame(door2)
+PlayGame(door2) ## test
+
+door3 = 5
+
+class(door3) = "door" ## why does this still work?
+
+PlayGame(door3)
