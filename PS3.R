@@ -18,7 +18,7 @@ PlayGame.door = function(door){ ## creates a function using PlayGame method for 
 }
 }
 
-PlayGame(door1) ## test
+PlayGame.door(door1) ## test
 
 
 setClass(Class = "door", ## creates a new class "door"
@@ -48,3 +48,19 @@ generic = function(object = "door"){ ## creates interior of generic function Pla
 
 setGeneric("PlayGame", generic) ## sets the generic as the one I just created
 
+setMethod("PlayGame", "door", 
+          function(object){ ## sets the method of the PlayGame function for class door
+            car = ceiling(runif(1, 0, 3))
+            if (object == car){
+              return("Congratulations! You Win")
+            }
+            else { ## prints sorry you lose if the numbers are not equal
+              return("Sorry :( You Lose")
+          }}
+            )
+
+door2 = (3)
+
+class(door2) = "door"
+
+PlayGame(door2)
