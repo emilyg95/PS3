@@ -87,6 +87,8 @@ createstudent = function(name){ ## function to create a student
 
 Emily = createstudent("Emily")
 
+class(Emily)
+
 sort.student = function(student, x){ ## creates a function to sort the student into a house which will take in the arguments "student" and "x" which will be a 4x4 matrix as specified in the question
   a = c(student[[2]], student[[3]], student[[4]], student[[5]]) ## a vector of the student's four values
   vector_a = x%*%a ## multiplies the matrix x by the vector a
@@ -105,28 +107,31 @@ vec_x = ceiling(runif(16, 1, 100))
 matrix_X = matrix(vec_x, nrow = 4, ncol = 4)
 
 sort.student(Emily, matrix_X) ## it works!
-  
+
 sort.student2 = function(student, x){ ## creates a function to sort the student into a house which will take in the arguments "student" and "x" which will be a 4x4 matrix as specified in the question
   a = c(student[[2]], student[[3]], student[[4]], student[[5]]) ## a vector of the student's four values
   vector_a = x%*%a ## multiplies the matrix x by the vector a
   rank_a = rank(vector_a, ties.method = "first") ## creates a new vector that is a rank order list of the values in vector_a with 4 being the largest and 1 being the smallest
-  if (rank_a[[1]] == 4){ ## if else statement that checks the placement of the number 4 in rank_a and returns a house depending on where it is
-    print("GRYFFINDOR")}
+  if (rank_a[[1]] == 4){ ## if else statement that checks the placement of the number 4 in rank_a and appends a new class to the student indicating the correct house depending on where it is
+    class(student) = append(class(student), "GRYFFINDOR") ## uses the class setting function to append a second class to the student labeled depending on the corresponding house of the ranking 
+    assign(student$name, student, envir = .GlobalEnv) ## creates a new variable replacing the input for student with a new object including the appended class 
+    return(student) ## returns the new object
+    }
   else if (rank_a[[2]] == 4){
-    print("SLYTHERIN")}
+    class(student) = append(class(student), "SLYTHERIN") 
+    assign(student$name, student, envir = .GlobalEnv)
+    return(student)
+    }
   else if (rank_a[[3]] == 4){
-    print("RAVENCLAW")}
+    class(student) = append(class(student), "RAVENCLAW")
+    assign(student$name, student, envir = .GlobalEnv)
+    return(student)
+    }
   else if (rank_a[[4]] == 4){
-    print("HUFFLEPUFF")}
-  if (rank_a[[1]] == 3){ ## if else statement that checks the placement of the number 3 in rank_a and returns a second house depending on where it is
-    print("GRYFFINDOR")}
-  else if (rank_a[[2]] == 3){
-    print("SLYTHERIN")}
-  else if (rank_a[[3]] == 3){
-    print("RAVENCLAW")}
-  else if (rank_a[[4]] == 3){
-    print("HUFFLEPUFF")}
+    class(student) = append(class(student), "HUFFLEPUFF") 
+    assign(student$name, student, envir = .GlobalEnv)
+    return(student)
+    }
 }
 
-sort.student2(Emily, matrix_X) ## it works!
-
+sort.student2(Emily, matrix_X)
