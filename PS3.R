@@ -73,3 +73,36 @@ door3 = 5
 class(door3) = "door" ## why does this still work?
 
 PlayGame(door3)
+
+
+## Activity 5:
+
+createstudent = function(name){ ## function to create a student
+  courage = ceiling(runif(1, 0, 100)) ## runif selects continuous values between the specified numbers, here one value between zero and one hundred
+  intelligence = ceiling(runif(1, 0, 100)) ## my values will actually be whole numbers between one and one hundred because I force it to round up to the nearest integer using ceiling
+  ambition = ceiling(runif(1, 0, 100)) ## I run this command four times and give each output a label corresponding to a house
+  effort = ceiling(runif(1, 0, 100))
+  return(structure(list("name" = name, "courage" = courage, "intelligence" = intelligence, "ambition" = ambition, "effort" = effort), class = "student"
+  ))} ## the function will return a list with the name of the student, and each attribute and it's value
+
+Emily = createstudent("Emily")
+
+sort.student = function(student, x){ ## creates a function to sort the student into a house which will take in the arguments "student" and "x" which will be a 4x4 matrix as specified in the question
+  a = c(student[[2]], student[[3]], student[[4]], student[[5]]) ## a vector of the student's four values
+  vector_a = x%*%a ## multiplies the matrix x by the vector a
+  rank_a = rank(vector_a, ties.method = "first") ## creates a new vector that is a rank order list of the values in vector_a with 4 being the largest and 1 being the smallest
+  if (rank_a[[1]] == 4){ ## if else statement that checks the placement of the number 4 in rank_a and returns a house depending on where it is
+    print("GRYFFINDOR")}
+  else if (rank_a[[2]] == 4){
+    print("SLYTHERIN")}
+  else if (rank_a[[3]] == 4){
+    print("RAVENCLAW")}
+  else if (rank_a[[4]] == 4){
+    print("HUFFLEPUFF")}
+}
+
+vec_x = ceiling(runif(16, 1, 100))
+matrix_X = matrix(vec_x, nrow = 4, ncol = 4)
+
+sort.student(Emily, matrix_X) ## it works!
+  
