@@ -135,3 +135,5 @@ sort.student2 = function(student, x){ ## creates a function to sort the student 
 }
 
 sort.student2(Emily, matrix_X)
+
+class(Emily)
