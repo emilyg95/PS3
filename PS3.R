@@ -137,3 +137,60 @@ sort.student2 = function(student, x){ ## creates a function to sort the student 
 sort.student2(Emily, matrix_X)
 
 class(Emily)
+
+Emily = createstudent("Emily")
+sort.student2(Emily, matrix_X) ## Hufflepuff
+
+Professor_Montgomery = createstudent("Professor_Montgomery")
+sort.student2(Professor_Montgomery, matrix_X) ## Ravenclaw
+
+Min_Hee = createstudent("Min_Hee")
+sort.student2(Min_Hee, matrix_X) ## Gryffindor
+
+Arya = createstudent("Arya")
+sort.student2(Arya, matrix_X) ## Slytherin
+
+## the houses probably won't turn out the same when you rerun it but I just wanted to make someone in each house for fun
+
+Gryffindor_Tower = new.env()
+Black_Lake = new.env()
+Ravenclaw_Tower = new.env()
+Basement = new.env() ## creates new environments named after the 4 Houses' common rooms
+
+curfew = function(student){
+  return(student)
+}
+
+curfew(Emily)
+curfew(Professor_Montgomery)
+curfew(Min_Hee)
+curfew(Arya)
+## check
+
+curfew.GRYFFINDOR = function(student){ ## creates a new function for the class GRYFFINDOR
+  assign(student$name, student, envir = Gryffindor_Tower) ## assigns the student to the new environment Gryffindor_Tower
+  ls(Gryffindor_Tower) ## returns a list of the objects in the environment Gryffindor_Tower
+}
+
+curfew.GRYFFINDOR(Min_Hee) ## check
+
+curfew.SLYTHERIN = function(student){
+  assign(student$name, student, envir = Black_Lake)
+  ls(Black_Lake)
+}
+
+curfew.SLYTHERIN(Arya)
+
+curfew.RAVENCLAW = function(student){
+  assign(student$name, student, envir = Ravenclaw_Tower)
+  ls(Ravenclaw_Tower)
+}
+
+curfew.RAVENCLAW(Professor_Montgomery)
+
+curfew.HUFFLEPUFF = function(student){
+  assign(student$name, student, envir = Basement)
+  ls(Basement)
+}
+
+curfew.HUFFLEPUFF(Emily)
